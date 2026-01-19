@@ -9,10 +9,10 @@ app.post('/events', async (req, res) => {
   console.log('Received event:', event);
 
   try {
-    await axios.post('http://localhost:5000/events', event); // posts
-    await axios.post('http://localhost:5001/events', event); // comments
-    await axios.post('http://localhost:5002/events', event); // query
-    await axios.post('http://localhost:5003/events', event); // moderation
+    await axios.post('http://posts:5000/events', event);
+    await axios.post('http://comments:5001/events', event);
+    await axios.post('http://query:5002/events', event);
+    await axios.post('http://moderation:5003/events', event);
   } catch (err) {
     console.error('Error sending event:', err.message);
   }
@@ -20,4 +20,6 @@ app.post('/events', async (req, res) => {
   res.send({ status: 'OK' });
 });
 
-app.listen(5005, () => console.log('Event bus running on http://localhost:5005'));
+app.listen(5005, () =>
+  console.log('Event bus running on port 5005')
+);

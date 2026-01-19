@@ -31,7 +31,7 @@ app.post('/comments/:postId', async (req, res) => {
   comments.push(newComment);
 
   // 🔥 Saada sündmus event-bus'i
-  await axios.post('http://localhost:5005/events', {
+  await axios.post('http://event-bus:5005/events', {
     type: 'CommentCreated',
     data: newComment,
   });
@@ -52,7 +52,7 @@ app.post('/events', async (req, res) => {
       comment.status = status;
 
       // Saada uuendatud sündmus
-      await axios.post('http://localhost:5005/events', {
+      await axios.post('http://event-bus:5005/events', {
         type: 'CommentUpdated',
         data: comment,
       });

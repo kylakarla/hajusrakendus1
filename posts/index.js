@@ -19,8 +19,8 @@ app.post('/posts', async (req, res) => {
   const newPost = { id: ++lastId, title, content };
   posts.push(newPost);
 
-  // 🔥 Send event to event bus
-  await axios.post('http://localhost:5005/events', {
+  // Send event to event bus
+  await axios.post('http://event-bus:5005/events', {
     type: 'PostCreated',
     data: newPost,
   });
