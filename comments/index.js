@@ -52,7 +52,7 @@ app.post('/events', async (req, res) => {
       comment.status = status;
 
       // Saada uuendatud sündmus
-      await axios.post('http://event-bus:5005/events', {
+      await axios.post('http://event-bus-srv:5005/events', {
         type: 'CommentUpdated',
         data: comment,
       });

@@ -20,10 +20,11 @@ app.post('/posts', async (req, res) => {
   posts.push(newPost);
 
   // Send event to event bus
-  await axios.post('http://event-bus:5005/events', {
-    type: 'PostCreated',
-    data: newPost,
-  });
+await axios.post('http://event-bus-srv:5005/events', {
+  type: 'PostCreated',
+  data: newPost,
+});
+
 
   res.status(201).json(newPost);
 });

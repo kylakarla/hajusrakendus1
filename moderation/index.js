@@ -1,32 +1,20 @@
 const express = require('express');
 const axios = require('axios');
-
 const app = express();
 app.use(express.json());
 
-// Kuulab kõik sündmused event-bus'ist
 app.post('/events', async (req, res) => {
   const { type, data } = req.body;
 
-  if (type === 'CommentCreated') {
-    // Kui kommentaar sisaldab sõna 'orange' → rejected, muidu approved
-    const status = data.content.includes('orange') ? 'rejected' : 'approved';
-
-    // Saadab sündmuse tagasi event-bus'ile
-    await axios.post('http://event-bus:5005/events', {
+  if(type === 'CommentCreated') {
+    const status = data.content.includes('bad') ? 'rejected' : 'approved';
+    await axios.post('http://event-bus-srv:5005/events', {
       type: 'CommentModerated',
-      data: {
-        id: data.id,
-        postId: data.postId,
-        status,
-        content: data.content,
-      },
+      data: { ...data, status }
     });
   }
 
   res.send({});
 });
 
-app.listen(5003, () =>
-  console.log('Moderation service running on port 5003')
-);
+app.listen(5003, () => console.log('Moderation service running on port 5003'));

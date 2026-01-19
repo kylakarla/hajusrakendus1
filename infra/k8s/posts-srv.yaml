@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 5000      # port klastri sees
+      targetPort: 5000 # port konteineris
+      nodePort: 30864  # port, mille kaudu saad Minikube’i kaudu ligi
