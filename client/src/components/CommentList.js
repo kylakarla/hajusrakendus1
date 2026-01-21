@@ -9,7 +9,7 @@ function CommentList({ postId, comments = [] }) {
     if (!content.trim()) return;
 
     try {
-      await axios.post(`http://localhost:5001/comments/${postId}`, { content });
+      await axios.post(`/posts/${postId}/comments`, { content });
       setContent('');
       // pole vaja refetchi — Query teenus saab sündmuse event-busi kaudu
     } catch (err) {

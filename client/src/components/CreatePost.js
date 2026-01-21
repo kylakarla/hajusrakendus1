@@ -8,7 +8,7 @@ function CreatePost({ onPostCreated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/posts', { title, content });
+      const res = await axios.post('/posts/create', { title, content });
       setTitle('');
       setContent('');
       onPostCreated(res.data);

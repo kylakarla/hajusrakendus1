@@ -8,7 +8,7 @@ function PostList() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5002/posts")
+    axios.get('/posts')
       .then(res => {
         const data = res.data;
         // Query teenus annab objekti, teisendame selle massiiviks
